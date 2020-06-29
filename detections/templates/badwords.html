@@ -8,75 +8,83 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css">    
   </head>
   <body>
 
     
-
-    {% for message in messages %}
-      <div class="alert alert-primary" role="alert">
-        {{ message }}
-      </div>
-    {% endfor %}
-    <div id="app-layout-body" class="container-fluid body-content" style="width:50vw;">
-
-      <br>
-
-      <h3 style="text-align:center;">Bad Words</h3>
-
-      <form style="padding:50px;">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Enter Bad Words to Add" name="add">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-info">Add</button>
-          </div>
+      {% for message in messages %}
+        <div class="alert alert-primary" role="alert">
+          {{ message }}
         </div>
-      </form>
+      {% endfor %}
+      <div id="app-layout-body" class="container-fluid body-content" style="width:50vw;">
 
-      <form style="padding:50px;padding-top:0px;">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search Bad Words" name="searchb" value="{{ request.GET.searchb }}">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-info">Search</button>
+        <br>
+
+        <h3 style="text-align:center;">Bad Words</h3>
+
+        <form style="padding:50px;">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter Bad Words to Add" name="add">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-info">Add</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
 
-      <ul class="list-group">
-        {% for obj in word_obj %}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{obj.name}}
-            <a href="{% url 'remove' obj.id %}">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-          
-      <nav aria-label="Page navigation example" style="padding-left: 150px;">
-        <ul class="pagination">
-          {% if word_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{word_obj.previous_page_number}}">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{word_obj.previous_page_number}}">{{word_obj.previous_page_number}}</a></li>
-          {% endif %}
-          
-          <li class="page-item"><a class="page-link" href="?page={{word_obj.number}}">{{word_obj.number}}</a></li>
-          
-          {% if word_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{word_obj.next_page_number}}">{{word_obj.next_page_number}}</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{word_obj.next_page_number}}">Next</a></li>
-          {% endif %}
+        <form style="padding:50px;padding-top:0px;">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Bad Words" name="searchb" value="{{ request.GET.searchb }}">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-info">Search</button>
+            </div>
+          </div>
+        </form>
+
+        <ul class="list-group">
+          {% for obj in word_obj %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{obj.name}}
+              <a href="{% url 'remove' obj.id %}">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            </li>
+          {% endfor %}
         </ul>
-      </nav>
+            
+        <nav aria-label="Page navigation example" style="padding-left: 150px;">
+          <ul class="pagination">
+            {% if word_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{word_obj.previous_page_number}}">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="?page={{word_obj.previous_page_number}}">{{word_obj.previous_page_number}}</a></li>
+            {% endif %}
+            
+            <li class="page-item"><a class="page-link" href="?page={{word_obj.number}}">{{word_obj.number}}</a></li>
+            
+            {% if word_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{word_obj.next_page_number}}">{{word_obj.next_page_number}}</a></li>
+              <li class="page-item"><a class="page-link" href="?page={{word_obj.next_page_number}}">Next</a></li>
+            {% endif %}
+          </ul>
+        </nav>
 
-      <a href="/"><button type="button" class="btn btn-info" style="margin-left:300px;" >Home</button></a>
-      <a href="run"><button type="button" class="btn btn-success">Run</button></a>
-      
-      <br>
-      <br>
-      
-    </div>
+        <a href="/"><button type="button" class="btn btn-info" style="margin-left:300px;" >Home</button></a>
+        <a href="run"><button type="button" class="btn btn-success">Run</button></a>
+        <br>
+        <span style="margin-left:200px;">*Run may take around 5-10 mins to run the program</span>
+        
+        <br>
+        <br>
+        <br>
+        
+      </div>
+    
+
   </body>
 </html>
