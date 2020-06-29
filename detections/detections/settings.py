@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'import_export',
     'link.apps.LinkConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,5 +124,3 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'asssets')
 
-
-IMPORT_EXPORT_USE_TRANSACTIONS = True

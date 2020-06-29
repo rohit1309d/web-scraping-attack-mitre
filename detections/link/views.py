@@ -43,8 +43,15 @@ def badwords(request):
             messages.info(request, "The word exists")
     except:
         print()
+
     finally:
         words = word.objects.all()
+        try:
+            query = request.GET["searchb"]
+            if query:
+                words = words.filter(name = query.strip())
+        except:
+            print()    
         paginator = Paginator(words,20) 
         page_number = request.GET.get('page')
         word_obj = paginator.get_page(page_number)
