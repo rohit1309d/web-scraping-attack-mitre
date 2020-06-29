@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css">    
   </head>
   <body>
-
     
       {% for message in messages %}
         <div class="alert alert-primary" role="alert">
@@ -33,7 +32,7 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Enter Bad Words to Add" name="add">
             <div class="input-group-btn">
-              <button type="button" class="btn btn-info">Add</button>
+              <button type="submit" class="btn btn-info">Add</button>
             </div>
           </div>
         </form>
@@ -42,7 +41,7 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search Bad Words" name="searchb" value="{{ request.GET.searchb }}">
             <div class="input-group-btn">
-              <button type="button" class="btn btn-info">Search</button>
+              <button type="submit" class="btn btn-info">Search</button>
             </div>
           </div>
         </form>
