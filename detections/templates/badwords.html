@@ -13,7 +13,17 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js" ></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css"> 
+    <style media="screen">
+      .spinner-border{
+          width: 25rem;
+          height: 25rem;
+          margin-top:20vh;
+      }
+      .text{
+        text-align: center;
+      }
+    </style>   
   </head>
   <body>
     
@@ -74,16 +84,30 @@
         </nav>
 
         <a href="/"><button type="button" class="btn btn-info" style="margin-left:300px;" >Home</button></a>
-        <a href="run"><button type="button" class="btn btn-success">Run</button></a>
+        <a href="run" id="my_form"><button type="button" class="btn btn-success">Run</button></a>
         <br>
-        <span style="margin-left:200px;">*Run may take around 5-10 mins to run the program</span>
         
         <br>
         <br>
         <br>
         
       </div>
-    
-
+      <div id="loading" style="display:none;">
+        <h3 class="text">Please Wait!</h3>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function() { 
+          $('#my_form').click(function() {
+            alert("The function may take around 5-10 mins to run the program. Please wait!!");
+            $('#loading').show();
+            $('#app-layout-body').fadeOut();         
+          }); 
+      }); 
+    </script>
   </body>
 </html>
